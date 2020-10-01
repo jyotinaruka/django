@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Counter</title>
+        <style>
+            #wrapper {
+                width: 970px;
+                height: 1000px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            button {
+                padding: 5px 10px;
+                border-radius: 2px;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <p>Visit: {{request.session.visit}}</p>
+            <p>Counter: {{request.session.counter}}</p>
+            <button><a href='/destroy_session'>Reset</a></button>
+            <button><a href='/increase_by_2'>+2</a></button>
+            
+
+
+            <form action="/user" method="POST">
+                {% csrf_token %}
+                <input type="number" name="number" value="1">
+                <button type="submit">Submit</button>
+                
+            </form>
+
+        </div>
+
+
+
+
+
+
+
+    </body>
+
+</html>
