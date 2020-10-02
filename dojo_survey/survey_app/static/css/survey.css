@@ -1,0 +1,10 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	width: 970px;
+	height: 1000px;
+	margin: 0px auto;
+}

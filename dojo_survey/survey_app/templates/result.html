@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Results</title>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/survey.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <h1>Here is the submitted info!</h1>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{name}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Location</th>
+                        <td>{{location}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Language</th>
+                        <td>{{language}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Comments</th>
+                        <td>{{comment}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>
