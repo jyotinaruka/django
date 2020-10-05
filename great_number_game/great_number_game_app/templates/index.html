@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Great Number Game!</title>
+    <style>
+        #wrapper {
+            margin: 0 auto;
+            width: 970px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .result {
+            display: none;
+            width: 200px;
+            min-height: 100px;
+            border: 5px solid black;
+            color: white;
+            padding: 50px 20px;
+            margin: 0 auto;
+            font-size: 36px;
+        }
+        .high, .low, .loose {
+            background-color: tomato;
+            display: block;
+        }
+        .correct {
+            background-color: forestgreen;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Welcome to the Great Number Game!</h1>
+        <p>I am thinking a number between 1 to 100</p>
+        {% if 'count' in request.session %}
+            <p>Your guess attempts: {{ request.session.count }}</p>
+        {% else %}
+            <p>Take a guess!</p>
+        {% endif %}
+
+        {% if 'status' in request.session %}
+        <p class="result {{ request.session.status }}">
+            {{ request.session.status }}
+            {% if request.session.status == 'correct' or request.session.status == 'loose' %}
+            <button><a href="/reset">Play again</a></button>
+            {% endif %}
+        </p>
+        {% endif %}
+        <p></p>
+
+        {% if request.session.status == 'correct' %}
+        <form action="/addwinner" method="POST">
+            {% csrf_token %}
+            <label>
+                Your name:
+                <input type="text" name="name">
+            </label>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        {% elif request.session.count < 5 %}
+        <form action="/process" method="POST">
+            {% csrf_token %}
+            <input type="number" name="guess" value="0">
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>  
+</body>
+</html>
