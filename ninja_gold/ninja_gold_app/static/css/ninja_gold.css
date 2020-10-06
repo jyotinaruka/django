@@ -1,0 +1,60 @@
+#wrapper {
+	width: 970px;
+	height: 1000px;
+	margin: 0 auto;
+	text-align: center;
+}
+#container {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px 0;
+	padding: 0 5px;
+}
+
+h1 {
+	background: linear-gradient(grey, black, grey);
+	color: white;
+	padding: 10px;
+}
+
+#farm {
+	border: 3px solid black;
+	padding: 10px 20px;
+}
+#cave {
+	border: 3px solid black;
+	padding: 10px 20px;
+}
+#house {
+	border: 3px solid black;
+	padding: 10px 20px;
+}
+
+#casino {
+	border: 3px solid black;
+	padding: 10px 10px;
+}
+#activity {
+	width: 970px;
+	height: 200px;
+	border: 1px solid black;
+	overflow: auto;
+	text-align: left;
+	padding: 5px;
+}
+
+#activities h3 {
+	text-align: left;
+}
+
+#activity p {
+	margin: 0;
+}
+
+p.red {
+	color: red;
+}
+
+p.green {
+	color: green;
+}
