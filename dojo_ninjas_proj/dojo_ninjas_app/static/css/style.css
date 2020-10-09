@@ -1,0 +1,13 @@
+#wrapper {
+	width: 970px;
+	margin: 10px auto;
+}
+h1,
+h2 {
+	text-align: center;
+}
+hr {
+	height: 3px;
+	background: linear-gradient(grey, white, black);
+}
+

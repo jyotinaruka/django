@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dojo_ninja</title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div class="row">
+                <div class="col">
+                    <h2>Add a Dojo</h2>
+                    <form action="/process" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="dojo_name">Name</label>
+                            <input type="text" class="form-control" id="dojo_name" name="dojo_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="dojo_city">City</label>
+                            <input type="text" class="form-control" id="dojo_city" name="dojo_city">
+                        </div>
+                        <div class="form-group">
+                            <label for="dojo_state">State</label>
+                            <input type="text" class="form-control" id="dojo_state" name="dojo_state">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col">
+                    <h2>Add a Ninja</h2>
+                    <form action="/process_ninja" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="ninja_first">First Name</label>
+                            <input type="text" class="form-control" id="ninja_first" name="ninja_first">
+                        </div>
+                        <div class="form-group">
+                            <label for="ninja_last">Last Name</label>
+                            <input type="text" class="form-control" id="ninja_last" name="ninja_last">
+                        </div>
+                        <div class="form-group">
+                            <label for="ninja_dojo">Dojo</label>
+                            <select class="form-control" id="ninja_dojo" name="ninja_dojo">
+                                <option>Select from Dojo</option>
+                                {% for dojo_id,dojo_data in dojo_dict.items %}
+                                <option value="{{dojo_data.dojo.id}}">{{dojo_data.dojo.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h2>All the Dojos</h2>
+                    <div>
+                        {% for dojo_id,dojo_data in dojo_dict.items %}
+                        <p>Ninjas at the {{dojo_data.dojo.name}} ({{dojo_data.ninjas|length}}) <a
+                               href="/delete/{{dojo_data.dojo.id}}">Delete</a></p>
+                        <ul>
+                            {% for ninja in dojo_data.ninjas %}
+                            <li>{{ninja.first_name}} {{ninja.last_name}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </body>
+
+</html>

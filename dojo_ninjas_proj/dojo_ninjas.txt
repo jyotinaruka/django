@@ -1,0 +1,51 @@
+# Query: Create 3 new dojos 
+Dojo.objects.create(name="CodingDojo_Bellevue")
+Dojo.objects.create(name="CodingDojo_Seattle")
+Dojo.objects.create(name="CodingDojo_Redmond")
+
+# Query: Delete the 3 dojos you just created
+dojo = Dojo.objects.get(id=1)
+dojo.delete()
+dojo = Dojo.objects.get(id=2)
+dojo.delete()
+dojo = Dojo.objects.get(id=3)
+dojo.delete()
+
+
+# Query: Create 3 more dojos
+Dojo.objects.create(name="CodingDojo_Bellevue")
+Dojo.objects.create(name="CodingDojo_Seattle")
+Dojo.objects.create(name="CodingDojo_Redmond")
+
+
+# Query: Create 3 ninjas that belong to the first dojo
+Ninja.objects.create(first_name='Ninja_1', last_name='Dojo_4', dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name='Ninja_2', last_name='Dojo_4', dojo=Dojo.objects.get(id=4))
+Ninja.objects.create(first_name='Ninja_3', last_name='Dojo_4', dojo=Dojo.objects.get(id=4))
+
+
+# Query: Create 3 ninjas that belong to the second dojo
+Ninja.objects.create(first_name='Ninja_1', last_name='Dojo_5', dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name='Ninja_2', last_name='Dojo_5', dojo=Dojo.objects.get(id=5))
+Ninja.objects.create(first_name='Ninja_3', last_name='Dojo_5', dojo=Dojo.objects.get(id=5))
+
+
+# Query: Create 3 ninjas that belong to the third dojo
+Ninja.objects.create(first_name='Ninja_1', last_name='Dojo_6', dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name='Ninja_2', last_name='Dojo_6', dojo=Dojo.objects.get(id=6))
+Ninja.objects.create(first_name='Ninja_3', last_name='Dojo_6', dojo=Dojo.objects.get(id=6))
+
+
+# Query: Retrieve all the ninjas from the first dojo
+Ninja.objects.filter(dojo=Dojo.objects.first())
+
+
+# Query: Retrieve all the ninjas from the last dojo
+Ninja.objects.filter(dojo=Dojo.objects.last())
+
+# Query: Retrieve the last ninja's dojo
+Ninja.objects.last().dojo
+
+
+# Query: Create a new dojo
+Dojo.objects.create(name="CodingDojo_Sillicon_Valley", desc="new dojo")
