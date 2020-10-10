@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Favorite Books</title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper" class="container">
+            <nav class="navbar navbar-dark bg-dark">
+                <div>
+                    <span class="mr-3 text-white navbar-brand">Welcome, {{user.first_name}} !</span>
+                    <a href="/books">All Books</a>
+                    <a href="/my_favorite_books">My Favorites</a>
+                    <a href="/logout">Log Out</a>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col">
+                    <h5>Add a Favorite Book</h5>
+                    <form class="my-3" action="/add_books" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-3 col-form-label">Title</label>
+                            <div class="col">
+                                <input type="title" class="form-control" id="title" name="title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col">
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            {% if message.tags == 'error' %} <li class="text-danger">{{message}}</li> {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="form-group justify-content-end">
+                            <button class="btn btn-primary float-right" type="submit">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col">
+                    <h3>All Books</h3>
+                    {% for book in all_books %}
+                    <div>
+                        <h4><a href="/books/{{book.id}}">{{book.title}}</a></h4>
+                        <p>(added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</p>
+                        {% if book in user.liked_books.all %}
+                        <p><i>This is one of your favorites</i></p>
+                        {% else %}
+                        <p><a href="/add_favorite/{{book.id}}">Add to Favorite</a></p>
+
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
