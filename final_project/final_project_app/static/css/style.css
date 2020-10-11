@@ -1,0 +1,19 @@
+#wrapper {
+	width: 1500px;
+
+	margin: 0 auto;
+	padding: 0px;
+	background-color: rgb(156, 156, 180);
+}
+
+.right {
+	text-align: right !important;
+}
+
+.bg-blue {
+	background-color: rgb(117, 117, 236);
+}
+.bg-blue h1 {
+	text-align: center;
+	padding: 5px;
+}

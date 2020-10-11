@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Friendbook</title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper" class="container">
+            <header class="bg-blue">
+                <h1>Friendbook</h1>
+            </header>
+            <div class="row">
+                <div class="col">
+                    <form id="sign_up" action="/sign_up" method="POST">
+                        {% csrf_token %}
+                        <h1 class="text-center my-3">Create a New Account</h1>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="form-group row">
+                            <label for="first_name" class="col-sm-3 col-form-label">First Name</label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control" name="first_name" id="first_name" required
+                                       minlength="2">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="last_name" class="col-sm-3 col-form-label">Last Name</label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control" name="last_name" id="last_name" required
+                                       minlength="2">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm">
+                                <input type="email" class="form-control" name="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm">
+                                <input type="password" class="form-control" name="password" id="password" required
+                                       minlength="8">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="confirm_pw" class="col-sm-3 col-form-label">Confirm Password</label>
+                            <div class="col-sm">
+                                <input type="password" class="form-control" name="confirm_pw" id="confirm_pw" required
+                                       minlength="8">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button class="btn btn-primary mx-auto">Sign Up</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col">
+                    <form action="/login" method="POST">
+                        {% csrf_token %}
+                        <h1 class="text-center my-3">Login</h1>
+
+                        <div class="form-group row">
+                            <label for="login_email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm">
+                                <input type="email" class="form-control" name="email" id="login_email" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="login_password" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm">
+                                <input type="password" class="form-control" name="password" id="login_password"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button class="btn btn-primary mx-auto">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

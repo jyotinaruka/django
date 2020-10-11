@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-dark bg-dark">
+                <h1 class="navbar-brand wall-h1">Friendbook</h1>
+                <div>
+                    <span class="mr-3 text-white">Welcome, {{user.first_name}}</span>
+                    <a href="/logout">Log Out</a>
+                </div>
+            </nav>
+            <form class="my-3" action="/post_msg" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="message">Post a message</label>
+                    <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %} <li class="text-danger">{{message}}</li> {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="form-group justify-content-end">
+                    <button class="btn btn-primary float-right" type="submit">Post a message</button>
+                </div>
+            </form>
+
+            <div>
+                {% for post in posts %}
+                <div>
+                    <p><b>{{post.user.first_name}} {{post.user.last_name}} - {{post.created_at|date:"F dS Y"}}</b></p>
+                    <div class="pl-4">
+                        <p>{{post.message}}</p>
+                        <a href="/delete_message/{{post.id}}">Delete</a>
+                        <div class="pl-4">
+                            {% for comment in post.comments.all %}
+                            <p><b>{{comment.user.first_name}} {{comment.user.last_name}} -
+                                    {{comment.created_at|date:"F dS Y"}}</b></p>
+                            <p>{{comment.comment}}</p>
+                            {% endfor %}
+                        </div>
+                        <form class="pl-4 my-3" action="/post_comment" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{post.id}}">
+                            <div class="form-group">
+                                <label for="comment">Post a comment</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-success float-right" type="submit">Post a comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+    </body>
+
+</html>
