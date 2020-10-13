@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Tv Shows</title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <h1>Edit show {{show.id}}</h1>
+            <p class="right"><a href="/shows">Go back</a></p>
+            <p>
+                {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </p>
+            <form action="/shows/{{show.id}}/update" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{show.title}}">
+                </div>
+                <div class="form-group">
+                    <label for="network">Network</label>
+                    <input type="text" class="form-control" id="network" name="network" value="{{show.network}}">
+                </div>
+                <div class="form-group">
+                    <label for="release_date">Release Date</label>
+                    <input type="date" class="form-control" id="release_date" name="release_date"
+                           value="{{show.release_date|date:'Y-m-d'}}">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                    <textarea class="form-control" id="desc" name="desc" rows="3">{{show.description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                </div>
+            </form>
+            <p><a href="/shows/{{show.id}}">Go to Show</a></p>
+        </div>
+    </body>
+
+</html>
