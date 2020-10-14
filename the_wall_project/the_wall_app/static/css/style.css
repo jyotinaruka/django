@@ -1,0 +1,8 @@
+#wrapper {
+	width: 970px;
+	height: auto;
+	margin: 10px auto;
+}
+.right {
+	text-align: right !important;
+}
