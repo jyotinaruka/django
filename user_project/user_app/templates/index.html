@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Users With Templates</title>
+        {% load static%}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/user.css' %}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>All the Users</h1>
+            <table class="table table-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr scope="row">
+                        <td>{{user.id}}</td>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.age}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <hr>
+            <h2>Add a User</h2>
+            
+
+            <form action="/process_user" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="text" name="first_name" placeholder="First name">
+                    </div>
+                    <div class="col-2">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="last_name" placeholder="Last name">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-2">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="email" class="form-control" name="email" placeholder="Email">
+                    </div>
+                    <div class="col-2">
+                        <label>Age</label>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" name="age" placeholder="Age">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
